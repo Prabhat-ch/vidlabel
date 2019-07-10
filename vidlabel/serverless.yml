@@ -1,0 +1,16 @@
+service: vidlabel # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: python3.7
+  profile: ${file(../config.${self:provider.stage}.json):vidlabel.profile}
+
+functions:
+  process_video:
+    handler: handler.process_video
+    events:
+      - s3:
+          bucket: ${file(../config.${self:provider.stage}.json):vidlabel.bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - suffix: .mp4
