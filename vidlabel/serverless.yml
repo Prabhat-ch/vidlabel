@@ -5,6 +5,34 @@ provider:
   runtime: python3.7
   profile: ${file(../config.${self:provider.stage}.json):vidlabel.profile}
 
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'rekognition:*'
+      Resource: '*'
+
+    - Effect: 'Allow'
+      Action:
+        - 's3:GetObject'
+      Resource:
+        Fn::Join:
+          - ''
+          - - ${self:custom.bucket_arn}
+            - '/*'
+
+
+custom:
+  bucket_arn:
+    Fn::Join:
+      - ":"
+      - - arn
+        - aws
+        - s3
+        - ''
+        - ''
+        - ${file(../config.${self:provider.stage}.json):vidlabel.bucket}
+
+
 functions:
   process_video:
     handler: handler.process_video
