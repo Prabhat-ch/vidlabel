@@ -1,6 +1,7 @@
 {
   "vidlabel": {
     "profile": "",
-    "bucket": ""
+    "bucket": "",
+    "dynamodb": ""
   }
 }

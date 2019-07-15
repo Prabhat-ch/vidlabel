@@ -1,6 +1,7 @@
 {
   "vidlabel": {
     "profile": "pythonAutomation",
-    "bucket": "vidlabel"
+    "bucket": "vidlabel",
+    "dynamodb": "videoTable"
   }
 }
